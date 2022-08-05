@@ -3,6 +3,7 @@ import { FaCashRegister} from "react-icons/fa";
 import { Navigate, Route, Routes } from 'react-router-dom';
 import ProductForm from './components/ProductForm';
 import ProductList from './components/ProductList';
+import SaleList from './components/SaleList';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="products" element={<ProductList/>} />
           <Route path='products/product/new' element={<ProductForm />} />
           <Route path='products/product/:id' element={<ProductForm />} />
+          <Route path='sales' element={<SaleList />} />
         </Routes>
 
       </div>
