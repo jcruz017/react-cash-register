@@ -94,7 +94,7 @@ export default function SaleForm() {
         getProducts();
         if (id) {
             setEditMode(true);
-                getSale();
+            getSale();
         }
     }, [id, getSale, getProducts])
 
@@ -205,22 +205,6 @@ export default function SaleForm() {
                         <input readOnly type="number" value={saleForm.total}
                         />
                     </div>
-
-                    <div className="form-field">
-                        <label>Payment</label>
-                        <input type="number" min={0} value={saleForm.payment} onChange={(e) => setSaleForm({
-                            ...saleForm,
-                            payment: parseInt(e.target.value),
-                            change: parseInt(e.target.value) - (saleForm.total || 0)
-                        })}
-                        />
-                    </div>
-
-                    <div className="form-field">
-                        <label>Change</label>
-                        <input readOnly type="number" value={saleForm.change} />
-
-                    </div>
                     <div className="form-field">
                         <label>Is Loan?</label>
                         <input disabled={editMode} type="checkbox" checked={saleForm.isLoan} onChange={(e) => setSaleForm({
@@ -232,6 +216,27 @@ export default function SaleForm() {
 
 
                     </div>
+
+                    {(!saleForm.isLoan || editMode) && (
+                        <React.Fragment>
+                            <div className="form-field">
+                                <label>Payment</label>
+                                <input type="number" min={0} value={saleForm.payment} onChange={(e) => setSaleForm({
+                                    ...saleForm,
+                                    payment: parseInt(e.target.value),
+                                    change: parseInt(e.target.value) - (saleForm.total || 0)
+                                })}
+                                />
+                            </div>
+
+                            <div className="form-field">
+                                <label>Change</label>
+                                <input readOnly type="number" value={saleForm.change} />
+
+                            </div>
+                        </React.Fragment>
+                    )}
+
 
                     {saleForm.isLoan && (
                         <div className="form-field">
