@@ -3,6 +3,11 @@ import axios from 'axios';
 import { API } from '../config/constants';
 import { NavLink } from 'react-router-dom';
 import { Product } from './ProductList';
+import { disconnect } from 'process';
+
+type Dict<TValue> = {
+    [key: string]: TValue
+}
 
 export interface ProductSale {
     productSaleId: number,
@@ -25,11 +30,13 @@ export interface Sale {
 
 export default function SaleList() {
     const [sales, setSales] = React.useState<ReadonlyArray<Sale>>([]);
+    const [showDetail, setShowDetail] = React.useState<Dict<Boolean>>({});
 
     const getSales = React.useCallback(async () => {
         try {
             const response = await axios.get<ReadonlyArray<Sale>>(`${API}/Sale`)
             setSales(response.data);
+            setShowDetail(response.data.reduce((dict, sale) => ({ ...dict, [sale.saleId]: false }), {} as Dict<boolean>))
         } catch (error) {
             console.error(error);
         }
@@ -60,20 +67,55 @@ export default function SaleList() {
                 <tbody>
                     {sales.length > 0 ? (
                         sales.map((sale, index) => (
-                            <tr key={sale.saleId} className={index % 2 === 1 ? 'odd' : 'even'}>
-                                <td>{sale.saleId}</td>
-                                <td>{sale.date}</td>
-                                <td>{sale.total}</td>
-                                <td>{sale.isLoan ? 'Yes' : 'No'}</td>
-                                <td>{sale.apartmentNumber}</td>
-                                <td>{sale.payment}</td>
-                                <td>{sale.payment > 0 ? sale.payment - sale.total : 0 }</td>
-                                <td>
-                                    <NavLink to={`/sales/sale/${sale.saleId}`}>
-                                        <button disabled={sale.payment >0 }>Edit</button>
-                                    </NavLink>
-                                </td>
-                            </tr>
+                            <React.Fragment>
+                                <tr key={sale.saleId} className={index % 2 === 1 ? 'odd' : 'even'}>
+                                    <td>
+                                        <button onClick={() =>
+                                            setShowDetail({ ...showDetail, [sale.saleId]: !showDetail[sale.saleId] })
+                                        } >{showDetail[sale.saleId] ? "↓" : "→"} </button>
+                                        {sale.saleId}
+                                    </td>
+                                    <td>{sale.date}</td>
+                                    <td>{sale.total}</td>
+                                    <td>{sale.isLoan ? 'Yes' : 'No'}</td>
+                                    <td>{sale.apartmentNumber}</td>
+                                    <td>{sale.payment}</td>
+                                    <td>{sale.payment > 0 ? sale.payment - sale.total : 0}</td>
+                                    <td>
+                                        <NavLink to={`/sales/sale/${sale.saleId}`}>
+                                            <button disabled={sale.payment > 0}>Edit</button>
+                                        </NavLink>
+                                    </td>
+                                </tr>
+                                {showDetail[sale.saleId] && (
+                                    <tr>
+                                        <td colSpan={8}>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Quantity</th>
+                                                        <th>Price</th>
+                                                        <th>Total</th>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+                                                    {sale.productSales.map((productSale, psIndex) => (
+                                                        <tr>
+                                                            <td>{productSale.product.name}</td>
+                                                            <td>{productSale.quantity}</td>
+                                                            <td>{productSale.price}</td>
+                                                            <td>{productSale.quantity * productSale.price}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+
+                                            </table>
+                                        </td>
+
+                                    </tr>)}
+                            </React.Fragment>
                         ))
                     ) : (
                         <tr>
