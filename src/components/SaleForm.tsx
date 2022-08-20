@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { API } from '../config/constants';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ProductSale, Sale } from './SaleList';
+import { Sale } from './SaleList';
 import { Product } from './ProductList';
 import Select from 'react-select';
 

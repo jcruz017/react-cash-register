@@ -67,7 +67,7 @@ export default function ProductList() {
                 <tbody>
                     {products.length > 0 ? (
                         products.map((product, index) => (
-                            <tr key={product.productId} className={index % 2 == 1 ? "odd" : "even"}>
+                            <tr key={product.productId} className={index % 2 === 1 ? "odd" : "even"}>
                                 <td>{product.name}</td>
                                 <td>{product.salePrice}</td>
                                 <td>{product.buyPrice}</td>
