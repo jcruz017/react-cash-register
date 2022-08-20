@@ -49,9 +49,9 @@ export default function ProductList() {
     }, [getProducts]);
 
     return (
-        <div className="product-lists">
+        <div className="product-list">
             <NavLink to='/products/product/new'>
-                <button>Add</button>
+                <button className="product-button">Add</button>
             </NavLink>
             <table className="product-table">
                 <thead>
@@ -75,9 +75,9 @@ export default function ProductList() {
                                 <td>{product.isActive ? "Yes" : "No"}</td>
                                 <td>
                                     <NavLink to={`/products/product/${product.productId}`}>
-                                        <button>Edit</button>
+                                        <button className="product-button">Edit</button>
                                     </NavLink>
-                                    <button onClick={() => toggleProduct(product.productId)} >
+                                    <button className="product-button" onClick={() => toggleProduct(product.productId)} >
                                         {product.isActive ? 'Deactivate' : 'Activate'}
                                     </button>
                                 </td>

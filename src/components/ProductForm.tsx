@@ -73,25 +73,25 @@ export default function ProductForm() {
             <div className="product-form-main">
                 <div className="form-field">
                     <label>Name</label>
-                    <input type="text" value={productForm.name} onChange={(e) =>
+                    <input className="border-field" type="text" value={productForm.name} onChange={(e) =>
                         setProductForm({ ...productForm, name: e.target.value })
                     } />
                 </div>
                 <div className="form-field">
                     <label>Sale Price</label>
-                    <input type="number" min={0} value={productForm.salePrice} onChange={(e) =>
+                    <input className="border-field" type="number" min={0} value={productForm.salePrice} onChange={(e) =>
                         setProductForm({ ...productForm, salePrice: parseInt(e.target.value) })
                     } />
                 </div>
                 <div className="form-field">
                     <label>Buy Price</label>
-                    <input type="number" min={0} value={productForm.buyPrice} onChange={(e) =>
+                    <input className="border-field" type="number" min={0} value={productForm.buyPrice} onChange={(e) =>
                         setProductForm({ ...productForm, buyPrice: parseInt(e.target.value) })
                     } />
                 </div>
                 <div className="form-field">
                     <label>Quantity</label>
-                    <input type="number" min={0} value={productForm.quantity} onChange={(e) =>
+                    <input className="border-field" type="number" min={0} value={productForm.quantity} onChange={(e) =>
                         setProductForm({ ...productForm, quantity: parseInt(e.target.value) })
                     } />
                 </div>

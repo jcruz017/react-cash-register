@@ -53,7 +53,7 @@ export default function SaleList() {
     return (
         <div className='sale-list'>
             <NavLink to='/sales/sale/new'>
-                <button>Add</button>
+                <button className="sale-button">Add</button>
             </NavLink>
             <table className='sale-table'>
                 <thead>
@@ -74,7 +74,7 @@ export default function SaleList() {
                             <React.Fragment key={sale.saleId}>
                                 <tr  className={index % 2 === 1 ? 'odd' : 'even'}>
                                     <td>
-                                        <button onClick={() =>
+                                        <button className="sale-button" onClick={() =>
                                             setShowDetail({ ...showDetail, [sale.saleId]: !showDetail[sale.saleId] })
                                         } >{showDetail[sale.saleId] ? "↓" : "→"} </button>
                                         {sale.saleId}
@@ -87,7 +87,7 @@ export default function SaleList() {
                                     <td>{sale.payment > 0 ? sale.payment - sale.total : 0}</td>
                                     <td>
                                         <NavLink to={`/sales/sale/${sale.saleId}`}>
-                                            <button disabled={sale.payment > 0}>Edit</button>
+                                            <button className="sale-button" disabled={sale.payment > 0}>Edit</button>
                                         </NavLink>
                                     </td>
                                 </tr>

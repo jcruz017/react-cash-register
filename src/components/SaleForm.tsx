@@ -155,7 +155,7 @@ export default function SaleForm() {
                             </button>
                         </div>
 
-                        <div />
+                    
                         <div className="form-group-body">
                             {saleForm.productSales.map((productSale, index) => (
                                 <div key={index} className="form-field">
@@ -207,12 +207,12 @@ export default function SaleForm() {
                     </div>
                     <div className="form-field">
                         <label>Total</label>
-                        <input readOnly type="number" value={saleForm.total}
+                        <input className="border-field" readOnly type="number" value={saleForm.total}
                         />
                     </div>
                     <div className="form-field">
                         <label>Is Loan?</label>
-                        <input disabled={editMode} type="checkbox" checked={saleForm.isLoan} onChange={(e) => setSaleForm({
+                        <input className="border-field" disabled={editMode} type="checkbox" checked={saleForm.isLoan} onChange={(e) => setSaleForm({
                             ...saleForm,
                             isLoan: e.target.checked
                         })}
@@ -226,7 +226,7 @@ export default function SaleForm() {
                         <React.Fragment>
                             <div className="form-field">
                                 <label>Payment</label>
-                                <input type="number" min={0} value={saleForm.payment} onChange={(e) => setSaleForm({
+                                <input className="border-field" type="number" min={0} value={saleForm.payment} onChange={(e) => setSaleForm({
                                     ...saleForm,
                                     payment: parseInt(e.target.value),
                                     change: parseInt(e.target.value) - (saleForm.total || 0)
@@ -236,7 +236,7 @@ export default function SaleForm() {
 
                             <div className="form-field">
                                 <label>Change</label>
-                                <input readOnly type="number" value={saleForm.change} />
+                                <input className="border-field" readOnly type="number" value={saleForm.change} />
 
                             </div>
                         </React.Fragment>
