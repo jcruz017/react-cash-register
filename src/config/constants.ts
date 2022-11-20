@@ -1,1 +1,1 @@
-export const API = 'https://cash-register-jc.herokuapp.com/api'
+export const API = 'https://cash-register-jc.onrender.com/api'
